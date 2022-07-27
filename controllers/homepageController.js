@@ -1,19 +1,8 @@
 const router = require('express').Router();
 const { User } = require('./../models');
 
-const todos = [
-  'Run a 5k',
-  'Do the laundry',
-  'Add more todos',
-];
 
-router.get('/', (req, res) => {
-  res.render('todos', {
-    todos,
-    coolestGuyInTheWorld: 'Manny',
-    favoriteFood: 'Surf and Turf burrito from the burrito on 16th and Mission',
-  });
-});
+router.get('/', (req, res) => res.render('landing_page'));
 
 //   HTML ROUTES  + API  POST, DELETE, PUT/PATCH     routes
 router.get('/users', async (req, res) => {
