@@ -7,14 +7,17 @@ router.get('/', (req, res) => res.render('landing_page'));
 
 //   HTML ROUTES  + API  POST, DELETE, PUT/PATCH     routes
 router.get('/users', async (req, res) => {
+  console.log(req.session, 'I AM THE SESSION');
   try {
     const dbUsersData = await User.findAll();
-    console.log(dbUsersData);
     const users = dbUsersData.map(dbUser => dbUser.get({plain: true}));
-    console.log(users);
-    res.render('users', {users});
+    res.render('users', {
+      users,
+      loggedInUser: req.session.user || null,
+      isLoggedIn: req.session.isLoggedIn,
+    });
   } catch (error) {
-    console.log('E L:25 homepageController', error);
+
     res.status(500).json(error);
   }
 });
