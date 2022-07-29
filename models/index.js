@@ -6,8 +6,7 @@ Todo.belongsTo(User, {
 });
 
 User.hasMany(Todo, {
-  foreignKey: 'id',
-  onDelete: 'CASCADE',
+  foreignKey: 'userId'
 });
 
 module.exports = {
