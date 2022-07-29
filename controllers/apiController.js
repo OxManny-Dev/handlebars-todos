@@ -73,9 +73,11 @@ router.post('/signin', async (req, res) => {
 
 
 router.post('/signout', async (req, res) => {
+  console.log('im out here');
   if (req.session.isLoggedIn) {
+    console.log('im out ghere');
     req.session.destroy(() => {
-      res.json({success: true});
+      res.send(true);
     });
   }
 });

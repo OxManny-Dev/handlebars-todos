@@ -3,7 +3,13 @@ const apiController = require('./apiController');
 const {Todo, User} = require('./../models');
 
 
-router.get('/', (req, res) => res.render('landing_page'));
+router.get('/', (req, res) => {
+
+  res.render('landing_page', {
+    isLoggedIn: req.session.isLoggedIn || false,
+  })
+});
+
 
 //   HTML ROUTES  + API  POST, DELETE, PUT/PATCH     routes
 router.get('/users', async (req, res) => {
@@ -50,6 +56,7 @@ router.get('/todos', async (req, res) => {
 
     res.render('todos', {
       todos,
+      isLoggedIn: req.session.isLoggedIn,
     });
   } catch (error) {
     res.status(500).json(error);
