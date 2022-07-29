@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const apiController = require('./apiController');
-const {User} = require('./../models');
+const {Todo, User} = require('./../models');
 
 
 router.get('/', (req, res) => res.render('landing_page'));
@@ -26,7 +26,7 @@ router.get('/users', async (req, res) => {
 router.get('/users/:userId', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.userId);
-    const user = userData.get({ plain: true });
+    const user = userData.get({plain: true});
     res.render('user_profile', {user});
   } catch (error) {
     res.status(500).json(error);
@@ -34,13 +34,29 @@ router.get('/users/:userId', async (req, res) => {
 });
 
 
-router.get('/todos', (req, res) => {
+router.get('/todos', async (req, res) => {
   if (!req.session.isLoggedIn) {
     return res.redirect('/');
   }
-  res.render('todos');
-});
 
+  try {
+    const userTodosFromDB = await Todo.findAll({
+      where: {
+        userId: req.session.user.id,
+      },
+    });
+
+    const todos = userTodosFromDB.map(todo => todo.get({plain: true}));
+
+    res.render('todos', {
+      todos,
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+
+
+});
 
 
 router.use('/api', apiController);

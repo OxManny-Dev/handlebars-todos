@@ -29,7 +29,7 @@ signUpBtn.addEventListener('click', async (event) => {
     });
 
     await response.json();
-    window.location.href = '/users';
+    window.location.href = '/todos';
   } catch (error) {
     alert(error);
   }
