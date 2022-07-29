@@ -53,7 +53,6 @@ router.get('/todos', async (req, res) => {
     });
 
     const todos = userTodosFromDB.map(todo => todo.get({plain: true}));
-
     res.render('todos', {
       todos,
       isLoggedIn: req.session.isLoggedIn,

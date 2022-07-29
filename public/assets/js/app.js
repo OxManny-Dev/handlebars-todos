@@ -4,6 +4,12 @@ const signUpBtn = document.getElementById('signUpBtn');
 const logoutBtn = document.getElementById('logoutBtn');
 
 
+
+
+
+
+
+
 logoutBtn?.addEventListener('click', async () => {
   try {
     const res = await fetch('/api/signout', {
@@ -17,6 +23,20 @@ logoutBtn?.addEventListener('click', async () => {
     alert(error);
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 signUpBtn.addEventListener('click', async (event) => {
